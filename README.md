@@ -1,1 +1,2 @@
 # ReactMemoryGame
+Memory card game built using React to practice new concepts like hooks, lifecycle methods, and asynchronous API calls. The game involves having the user click on each card only once, after a card is clicked they are all randomly redistributed and if the user clicks on the same card twice the game restarts and saves the user's best result. Once the user clicks all cards exactly once the game is completed and will end, asking if the user wants to play again.
