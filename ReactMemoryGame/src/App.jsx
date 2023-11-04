@@ -1,5 +1,5 @@
 import './App.css'
-import game from './components/game.jsx'
+import Game from './components/Game.jsx'
 
 function App() {
 
@@ -12,11 +12,9 @@ function App() {
           <h3>Click on a card only once to earn points, but don't click the same card twice or it's game over!</h3>
         </div>
 
-        <p>score component goes here</p>
-
       </div>
 
-      <p>game component goes here</p>
+      <Game></Game>
 
       
     </>

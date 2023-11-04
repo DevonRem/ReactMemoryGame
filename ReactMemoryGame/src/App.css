@@ -8,9 +8,10 @@ body {
 .header {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-content: center;
-  padding-bottom: 10dvh;
+  padding-bottom: 10 vh;
+
 }
 
 .headerText {
