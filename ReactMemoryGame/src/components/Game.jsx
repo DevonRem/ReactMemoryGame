@@ -1,5 +1,6 @@
 import { useState } from "react";
 import '../styles/game.css'
+import { useEffect } from "react";
 
 const cardInfo = [
     { "src": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png", "name": "Charmander"},
@@ -17,6 +18,7 @@ function Game() {
 
     const [cards, setCards] = useState([])
     const [turns, setTurns] = useState(0)
+    const [selected, setSelected] = useState([])
 
     const newGameshuffleCards = () => {
         const shuffledCards = [...cardInfo]
@@ -25,6 +27,7 @@ function Game() {
 
         setCards(shuffledCards)
         setTurns(0)
+        setSelected([])
     }
 
     const shuffleCards = () => {
@@ -35,6 +38,28 @@ function Game() {
         setCards(shuffledCards)
         setTurns(turns + 1)
     }
+       
+
+    const handleChoice = (card) => {
+        if (selected.indexOf(card) === -1) {
+            setSelected([...selected, card]);
+            shuffleCards();
+
+        }
+        else {
+            newGameshuffleCards();
+        }
+        if (selected.length === 8) {
+            //you win code here, got through all of them,maybe save this for useEffect
+        }
+        
+    }
+
+    /*
+    useEffect(()=> {
+
+
+    }, [selected]) */
 
 
 
@@ -44,9 +69,10 @@ function Game() {
         <button className="newGame" onClick={newGameshuffleCards}>New Game</button>
         <h3 className="score">Score: {turns}</h3>
         </div>
+
         <div className="gameContainer">
         {cards.map((card) => (
-                <button className="cardButton" key={card.id} onClick={shuffleCards}>
+                <button className="cardButton" key={card.id} onClick={()=>handleChoice(card.name)}>
                     <div>
                     <img src={card.src} />
                     <div className="pokeName">{card.name} </div>
@@ -55,14 +81,10 @@ function Game() {
             ))}
         </div>
 
-
-
         </>
     )
 }
 
 export default Game
-
-
 
 
