@@ -1,1 +1,0 @@
-//use state or maybe use effect to keep track of clicks here

@@ -2,6 +2,7 @@ import { useState } from "react";
 import '../styles/game.css'
 import { useEffect } from "react";
 
+
 const cardInfo = [
     { "src": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png", "name": "Charmander"},
     { "src": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png", "name": "Gengar"},
@@ -19,6 +20,7 @@ function Game() {
     const [cards, setCards] = useState([])
     const [turns, setTurns] = useState(0)
     const [selected, setSelected] = useState([])
+    const [bestTurns, setbestTurns] = useState(0)
 
     const newGameshuffleCards = () => {
         const shuffledCards = [...cardInfo]
@@ -26,7 +28,6 @@ function Game() {
         .map((card) => ({...card, id:Math.random() }))
 
         setCards(shuffledCards)
-        setTurns(0)
         setSelected([])
     }
 
@@ -36,7 +37,7 @@ function Game() {
         .map((card) => ({...card, id:Math.random() }))
 
         setCards(shuffledCards)
-        setTurns(turns + 1)
+
     }
        
 
@@ -49,17 +50,30 @@ function Game() {
         else {
             newGameshuffleCards();
         }
-        if (selected.length === 8) {
-            //you win code here, got through all of them,maybe save this for useEffect
-        }
+
         
     }
 
-    /*
+    
     useEffect(()=> {
+        if (selected.length === 0 ) {
+            setTurns(0);
+        }
+        else {
+            setTurns(turns + 1)
+        }
+        if (selected.length === 8) {
+            console.log('works');
+            alert("You did it! Click the New Game button to play again!")
+        }
 
+    }, [selected]) 
 
-    }, [selected]) */
+    useEffect(() => {
+        if(turns >= bestTurns) {
+            setbestTurns(turns);
+        }
+    }, [turns])
 
 
 
@@ -67,7 +81,7 @@ function Game() {
         <>
         <div className="aboveGameContainer">
         <button className="newGame" onClick={newGameshuffleCards}>New Game</button>
-        <h3 className="score">Score: {turns}</h3>
+        <h3 className="score">Score: {turns} Best Score: {bestTurns}</h3>
         </div>
 
         <div className="gameContainer">
